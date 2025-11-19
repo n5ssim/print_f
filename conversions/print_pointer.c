@@ -6,7 +6,7 @@
 /*   By: n5ssim <nchouaf@student.s19.be>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 16:36:41 by n5ssim            #+#    #+#             */
-/*   Updated: 2025/11/18 16:40:24 by n5ssim           ###   ########.fr       */
+/*   Updated: 2025/11/19 18:05:33 by nchouaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,9 @@ int	print_pointer(unsigned long ptr)
 	int	count;
 
 	count = 0;
-	count += write(1, "0x", 2);
 	if (ptr == 0)
-		count += write(1, "0", 1);
-	else
-		count += ft_putptr(ptr);
+		return write(1, "(nil)", 5);
+	count += write(1, "0x", 2);
+	count += ft_putptr(ptr);
 	return (count);
 }

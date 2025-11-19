@@ -6,7 +6,7 @@
 /*   By: n5ssim <nchouaf@student.s19.be>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 16:00:44 by n5ssim            #+#    #+#             */
-/*   Updated: 2025/11/19 16:06:39 by n5ssim           ###   ########.fr       */
+/*   Updated: 2025/11/19 18:00:15 by nchouaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@ int	parse_format(char specifier, va_list *ap)
 	if (specifier == 's')
 		return (print_string(va_arg(*ap, char *)));
 	if (specifier == 'p')
-		return (print_pointer(va_arg(*ap, unsigned long)));
+	{
+		void	*ptr;
+		ptr = va_arg(*ap, void *);
+		return (print_pointer((unsigned long)ptr));
+	}
 	if (specifier == 'd' || specifier == 'i')
 		return (print_decimal(va_arg(*ap, int)));
 	if (specifier == 'u')
