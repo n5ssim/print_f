@@ -6,7 +6,7 @@
 /*   By: n5ssim <nchouaf@student.s19.be>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 16:00:44 by n5ssim            #+#    #+#             */
-/*   Updated: 2025/11/19 18:00:15 by nchouaf          ###   ########.fr       */
+/*   Updated: 2025/11/20 13:11:37 by nchouaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 int	parse_format(char specifier, va_list *ap)
 {
+	void	*ptr;
+
 	if (specifier == 'c')
 		return (print_char(va_arg(*ap, int)));
 	if (specifier == 's')
 		return (print_string(va_arg(*ap, char *)));
 	if (specifier == 'p')
 	{
-		void	*ptr;
 		ptr = va_arg(*ap, void *);
 		return (print_pointer((unsigned long)ptr));
 	}
@@ -34,5 +35,5 @@ int	parse_format(char specifier, va_list *ap)
 		return (print_hex_upper(va_arg(*ap, unsigned int)));
 	if (specifier == '%')
 		return (print_percent());
-	return (write(1, &specifier, 1)); 
+	return (write(1, &specifier, 1));
 }

@@ -6,11 +6,19 @@
 /*   By: nchouaf <nchouaf@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 15:48:19 by n5ssim            #+#    #+#             */
-/*   Updated: 2025/11/19 17:06:09 by nchouaf          ###   ########.fr       */
+/*   Updated: 2025/11/20 13:22:41 by nchouaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+static int	check_percent(const char *format, int *i, va_list *ap)
+{
+	(*i)++;
+	if (format[*i] == '%')
+		return (write(1, "%", 1));
+	return (parse_format(format[*i], ap));
+}
 
 int	ft_printf(const char *format, ...)
 {
@@ -24,18 +32,7 @@ int	ft_printf(const char *format, ...)
 	while (format[i])
 	{
 		if (format[i] == '%')
-		{
-			if (format[i + 1] == '%')
-			{
-				count += write(1, "%", 1);
-				i += 2;
-				continue;
-			}
-			i++;
-			if (!format[i])
-				break;
-			count += parse_format(format[i], &ap);
-		}
+			count += check_percent(format, &i, &ap);
 		else
 			count += write(1, &format[i], 1);
 		i++;
